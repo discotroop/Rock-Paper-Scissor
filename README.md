@@ -24,9 +24,13 @@ To Do:
         If tie - tie!
         It should console.log(final score.)
 
+    
+
 
 
 // Notes to improve
+
+- Make game round choice multiple - max 10
 
 1. Put in buttons instead of text
 2. Rework switch statements with variables for win/lose/tie
