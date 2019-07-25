@@ -2,13 +2,14 @@
 <head>
 <script>
 
+// generate "random" numbers
 function randomizer () {
         let result = Math.floor(Math.random() * 100); 
-        console.log (result);
+        // console.log (result);
         return result 
         }
 
-
+// generate "random" play based on randomizer()
 function computerPlay (num) {
     let result = "";
   
@@ -23,11 +24,78 @@ function computerPlay (num) {
     return result;
 }
 
-console.log(computerPlay(randomizer()));
 function gameRound(playerSelection, computerSelection) {
+    let player = playerSelection.toLowerCase();
+    let computer = computerSelection.toLowerCase();
 
+    let result = "";
+
+    // Case: player plays rock
+    if (player == "rock") {
+        switch (computer) {
+            case "paper":
+            result = "You Lose";
+            break;
+            case "rock":
+            result = "You tied";
+            break;
+            case "scissors":
+            result = "You win!";
+            break;
+        }
+    // Case: player plays paper
+    } else if (player == "paper") {
+        switch (computer) {
+            case "paper":
+            result = "You tied";
+            break;
+            case "rock":
+            result = "You win!";
+            break;
+            case "scissors":
+            result = "You lost";
+            break;
+        }
+    // Case: player plays scissors
+    } else if (player == "scissors") {
+        switch (computer) {
+            case "paper":
+            result = "You Win!";
+            break;
+            case "rock":
+            result = "You lost";
+            break;
+            case "scissors":
+            result = "You tied";
+            break;
+        }
+    // Case: player plays anything else.
+    } else {
+        result = "Sorry, something seems to have gone wrong!";
+    }
+console.log(result);
+return result
 
 }
+let counter = prompt ("How many rounds do you want to Play?");
+let round = prompt("rock? Paper? Scissors?");
+
+function game (humanPlay, roundCount) {
+    let passer = computerPlay(randomizer());
+    let countDown = roundCount;
+
+    if (countDown === 0) {
+        console.log("game over")
+        return "game over";
+    } else if (countDown >= 0) {
+        countDown = countDown - 1;
+        console.log(countDown);
+        return game(prompt("rock? Paper? Scissors?"), countDown);
+    }
+}
+
+game(round, counter);
+
 
 
 </script>
