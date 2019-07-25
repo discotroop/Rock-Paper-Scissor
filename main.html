@@ -1,2 +1,38 @@
 <!DOCTYPE html>
-<script></script>
+<head>
+<script>
+
+function randomizer () {
+        let result = Math.floor(Math.random() * 100); 
+        console.log (result);
+        return result 
+        }
+
+
+function computerPlay (num) {
+    let result = "";
+  
+    if (num <= 33) {
+        result = "Rock";
+    } else if (num <= 66) {
+        result = "Scissors";
+    } else {
+        result = "Paper";
+    }
+    console.log(result);
+    return result;
+}
+
+console.log(computerPlay(randomizer()));
+function gameRound(playerSelection, computerSelection) {
+
+
+}
+
+
+</script>
+</head>
+
+<body>
+    <p> oi </p>
+</body>
