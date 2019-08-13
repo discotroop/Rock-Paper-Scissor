@@ -28,93 +28,93 @@ function gameRound(playerSelection, computerSelection) {
     let computer = computerSelection.toLowerCase();
 
     let result = "";
+    let win = "You win!";
+    let lose = "You lose!";
+    let tie = "You tied.";
 
     // Case: player plays rock
     if (player == "rock") {
         switch (computer) {
             case "paper":
-            result = "You Lose";
+            result = lose;
             break;
             case "rock":
-            result = "You tied";
+            result = tie;
             break;
             case "scissors":
-            result = "You win!";
+            result = win;
             break;
         }
     // Case: player plays paper
     } else if (player == "paper") {
         switch (computer) {
             case "paper":
-            result = "You tied";
+            result = tie;
             break;
             case "rock":
-            result = "You win!";
+            result = win;
             break;
             case "scissors":
-            result = "You lost";
+            result = lose;
             break;
         }
     // Case: player plays scissors
     } else if (player == "scissors") {
         switch (computer) {
             case "paper":
-            result = "You Win!";
+            result = win;
             break;
             case "rock":
-            result = "You lost";
+            result = lose;
             break;
             case "scissors":
-            result = "You tied";
+            result = tie;
             break;
         }
     // Case: player plays anything else.
     } else {
         result = "Sorry, something seems to have gone wrong!";
     }
-return result
+console.log(result);
+return result;
 
 }
 
-// I feel like I shouldn't have to set all these up?
-let counter = prompt ("How many rounds do you want to Play?");
-let round = prompt("rock? Paper? Scissors?");
-let countUp = 0;
-let playerScore = 0;
-let computerScore = 0;
+// Messy and not very SOLID but it gets the job done.
 
-// current functionality
-    // can call itself to x number of times where x is a number user specified
-    // can console log winning/losing statement per a round
-    // can console log round count with message
+function game() {
+    // Set Baseline Scores
+    let playerScore = 0;
+    let computerScore = 0;
 
-    // cannot track score over time
-    // cannot compare tracked scores
+    // Loop to set rounds
+    for (let i = 1; i < 6; i++) {
 
-    // this could probably be done more cleanly with a for - loop that
-    // returns i as the round count.
-    // additionally that would make it easier to count up score
-    // a simple if else. - especially if we put the round messages in variables
-    // aka if lost - pc ++ if win self++ if tie - do nothing.
-
-function game (humanPlay, roundCount) {
-    let passer = computerPlay(randomizer());
-    let countDown = roundCount;
-
-    if (countDown === 0) {
-        console.log("game over")
-        return "game over";
-    } else {
-        countDown--;
-        countUp++;
-        console.log(gameRound(humanPlay, passer) + " Round " + countUp);
-        return game(prompt("rock? Paper? Scissors?"), countDown);
+        // Assign result of rounds to roundResult to allow testing.
+        let roundResult = gameRound(prompt("rock? paper? scissors?"), computerPlay(randomizer()));
+        
+        // Count score based on roundResult
+        if (roundResult === "You win!") {
+            playerScore++;
+        } else if (roundResult === "You lose!") {
+            computerScore++;
+        }
+        console.log("round " + i);
     }
+
+    // Compare scores at end of 5 rounds.
+    if (playerScore > computerScore) {
+        console.log("Winner Winner Chicken Dinner!" + " Your Score " + playerScore + " Computer Score " + computerScore);
+    } else if (computerScore > playerScore) {
+        console.log("Better luck next time, why not refresh and try again!?"  + " Your Score " + playerScore + " Computer Score " + computerScore);
+    } else {
+        console.log("You tied!"  + " Your Score " + playerScore + " Computer Score " + computerScore);
+    }
+
 }
 
-game(round, counter);
-
-
+// Initial function call.
+game();
 
 </script>
 </head>
