@@ -1,37 +1,20 @@
 A basic version of the game Rock/Paper/Scissors that allows the user to play against a "random" computer counterpart.
 
+v1 - Console app with prompts for user input
+v2 - Move everything player sees/uses from console to DOM
+
+8-20 - v2 is at minimum viable level.
+
 This is an exercise for the Odin Project.
 
-To Do:
 
-1. Write "game" function
-    It should call computerPlay every round
-        It should pass computerPlay into the game() function.
-    It should keep score.
-        It should ++ player score when play wins round
-        It should ++ pc score when pc wins
-        It should ++ no one if no one wins
-        It should console.log score(s)
-    It should end after round 5
-        It should end recursion when countDown === 0
-        It should ++ countUp every time game is called
-        It should return count Up to the user.
-        It should console.log countUp
-
-    It should be able to determine, win, lost, tied (at end of round 5)
-        If player score > pc - player win 
-        If player score < pc - pc win!
-        If tie - tie!
-        It should console.log(final score.)
-
+Minimum Requirements.
+// 1. copy original code to new directory
+// 2. remove logic that ends play at five rounds
+// 3. create three buttons, on for each selection
+	// a. add event listener to the button that calls playround function with the correct player
+	// selection everytime a button is clicked
+	// (you keep the console logs for this step.)
+// 4. Add a div for displaying results and change all console.logs into DOM methods
+// 5. Display the running score, and announce a winner of the game once the play reaches 5 points
     
-
-
-
-// Notes to improve
-
-- Make game round choice multiple - max 10
-
-1. Put in buttons instead of text
-2. Rework switch statements with variables for win/lose/tie
-3. Rework result answer with `` quotes to customize returns

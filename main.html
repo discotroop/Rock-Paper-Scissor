@@ -1,11 +1,55 @@
 <!DOCTYPE html>
-<head>
+<head> </head>
+
+<body>
+    <div id ="final"> <h1>Hello Friends</h1></div>
+
+    <div id="scoreCard">
+        <p id="playerScore">0</p>
+        <p id="round">1</p>
+        <p id="computerScore">0</p>    
+    </div>
+
+
+    <div id="buttons"> 
+        <button id="rock"> Rock </button>
+        <button id="paper"> Paper </button> 
+        <button id="scissors"> Scissors </button>
+    </div>
+
 <script>
 
-// generate "random" numbers
+let roundResult = "";
+
+// event handlers and display updaters.
+
+    let rock = document.querySelector("#rock");
+    rock.addEventListener('click', () => {
+        roundResult = gameRound("rock", computerPlay(randomizer()));
+        game(roundResult);
+    });
+
+    let paper = document.querySelector('#paper');
+    paper.addEventListener('click', () => {
+        roundResult = gameRound("paper", computerPlay(randomizer()));
+        game(roundResult);
+    });
+    let scissors = document.querySelector("#scissors");
+    scissors.addEventListener('click', () => {
+        roundResult = gameRound("scissors", computerPlay(randomizer()));
+        game(roundResult);
+    });
+
+    let playerScoreDisplay = document.querySelector("#playerScore");
+   
+    let computerScoreDisplay = document.querySelector("#computerScore");
+
+    let roundDisplay = document.querySelector("#round");
+
+    let final = document.querySelector("#final");
+
 function randomizer () {
         let result = Math.floor(Math.random() * 100); 
-        // console.log (result);
         return result 
         }
 
@@ -19,7 +63,6 @@ function computerPlay (num) {
     } else {
         result = "Paper";
     }
-    console.log(result);
     return result;
 }
 
@@ -32,7 +75,6 @@ function gameRound(playerSelection, computerSelection) {
     let lose = "You lose!";
     let tie = "You tied.";
 
-    // Case: player plays rock
     if (player == "rock") {
         switch (computer) {
             case "paper":
@@ -45,7 +87,6 @@ function gameRound(playerSelection, computerSelection) {
             result = win;
             break;
         }
-    // Case: player plays paper
     } else if (player == "paper") {
         switch (computer) {
             case "paper":
@@ -58,7 +99,6 @@ function gameRound(playerSelection, computerSelection) {
             result = lose;
             break;
         }
-    // Case: player plays scissors
     } else if (player == "scissors") {
         switch (computer) {
             case "paper":
@@ -75,50 +115,42 @@ function gameRound(playerSelection, computerSelection) {
     } else {
         result = "Sorry, something seems to have gone wrong!";
     }
-console.log(result);
 return result;
 
 }
 
-// Messy and not very SOLID but it gets the job done.
+let playerScore = 0;
+let computerScore = 0;
+let round = 1;
 
-function game() {
-    // Set Baseline Scores
-    let playerScore = 0;
-    let computerScore = 0;
-
-    // Loop to set rounds
-    for (let i = 1; i < 6; i++) {
-
-        // Assign result of rounds to roundResult to allow testing.
-        let roundResult = gameRound(prompt("rock? paper? scissors?"), computerPlay(randomizer()));
-        
-        // Count score based on roundResult
-        if (roundResult === "You win!") {
-            playerScore++;
-        } else if (roundResult === "You lose!") {
-            computerScore++;
+function game(result) {
+    round++;
+    roundDisplay.firstChild.data = round;
+    if (result === "You win!") {
+        playerScore++;
+        playerScoreDisplay.firstChild.data = playerScore;
+    } else if (result === "You lose!") {
+        computerScore++;
+        computerScoreDisplay.firstChild.data = computerScore;
+    }
+    let totalScore = playerScore + computerScore;
+    if (totalScore === 5) {
+        if (playerScore > computerScore) {
+            final.innerText = ("Winner Winner Chicken Dinner!" + " Your Score " + playerScore + " Computer Score " + computerScore);
+        } else if (computerScore > playerScore) {
+            final.innerText = ("Better luck next time, why not refresh and try again!?"  + " Your Score " + playerScore + " Computer Score " + computerScore);
+        } else { /*legacy */
+            final.innerText = ("You tied!"  + " Your Score " + playerScore + " Computer Score " + computerScore);
         }
-        console.log("round " + i);
+
+        // reset for next round.
+        playerScore = 0;
+        computerScore = 0;
+        round = 1;
+        playerScoreDisplay.firstChild.data = 0;
+        computerScoreDisplay.firstChild.data = 0;
     }
-
-    // Compare scores at end of 5 rounds.
-    if (playerScore > computerScore) {
-        console.log("Winner Winner Chicken Dinner!" + " Your Score " + playerScore + " Computer Score " + computerScore);
-    } else if (computerScore > playerScore) {
-        console.log("Better luck next time, why not refresh and try again!?"  + " Your Score " + playerScore + " Computer Score " + computerScore);
-    } else {
-        console.log("You tied!"  + " Your Score " + playerScore + " Computer Score " + computerScore);
-    }
-
-}
-
-// Initial function call.
-game();
+};
 
 </script>
-</head>
-
-<body>
-    <p> oi </p>
 </body>
